@@ -22,11 +22,7 @@ Test 1:
 609,925,821 bytes (20.81 GB on disk)
 
 Multithread Extraction:
-Folder Structure Extract Op Time: 0:00:19.879711
-Folder Structure Creation Op Time: 0:00:00.505282
-Data Query Extract Op Time: 0:00:36.107347
-Image write Op Time: 0:22:46.895491
-Total: 0:23:43.387831
+Total: 0:23:43.387
 
 MBUtil:
 Total: 0:25:29.414
