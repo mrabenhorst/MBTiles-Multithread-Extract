@@ -11,3 +11,21 @@ python MBMultithreadExtract.py <input mbtiles file> <output folder>
 
 Requirements:
 TBA
+
+
+Speed Testing
+===========================
+
+Test 1:
+530.6mb Tileset
+5,068,344 Tiles
+609,925,821 bytes (20.81 GB on disk)
+
+Multithread Extraction:
+Folder Structure Extract Op Time: 0:00:19.879711
+Folder Structure Creation Op Time: 0:00:00.505282
+Data Query Extract Op Time: 0:00:36.107347
+Image write Op Time: 0:22:46.895491
+Total: 0:23:43.387831
+
+MBUtil:
