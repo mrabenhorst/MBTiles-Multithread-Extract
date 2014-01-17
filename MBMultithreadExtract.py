@@ -1,6 +1,6 @@
 import sys, os, shutil, glob, sqlite3
 from PIL import Image
-import datetime, threading
+import datetime
 from multiprocessing import Pool
 
 inputMBTilesFolderPath = None
@@ -22,15 +22,22 @@ def main(argv):
 	global inputMBTilesFolderPath
 	global outputTilesFolderPath
 	global allImageData
-	
-	if( len(sys.argv) != 3 ):
-		print "MBMultithreadExtract.py <input mbtiles> <output folder>"
+		
+	if( len(sys.argv) < 3 or len(sys.argv) > 4 ):
+		print "MBMultithreadExtract.py <input mbtiles> <output folder> [<# processes>]"
 		sys.exit()
 	
 	curpath = os.path.abspath(os.curdir)
 	
 	inputMBTilesFolderPath = str(sys.argv[1])
 	outputTilesFolderPath = curpath+'/'+str(sys.argv[2])
+	numProcesses = -1
+	if len(sys.argv) == 4:
+		numProcesses = int(sys.argv[3])
+	if numProcesses < 1:
+		numProcesses = 20
+		
+	print "numProcesses: " + str(numProcesses)
 	
 	# Open SQLite connectioin
 	sqliteCon = None
@@ -70,7 +77,7 @@ def main(argv):
 		timeForOp = endTime - startTime
 		print "Data Query Extract Op Time: " + str(timeForOp)
 		
-		pool = Pool(processes=20) #
+		pool = Pool(processes=numProcesses) #
 		startTime = datetime.datetime.now() # * SQL DB Profiling
 		result = pool.apply_async(extractDataToTile,range(0,len(allImageData)))
 		pool.map(extractDataToTile,range(0,len(allImageData)))
